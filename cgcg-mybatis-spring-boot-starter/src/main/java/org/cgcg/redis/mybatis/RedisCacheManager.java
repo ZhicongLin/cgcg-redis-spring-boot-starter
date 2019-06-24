@@ -1,8 +1,6 @@
-package org.cgcg.redis.core.mybatis;
+package org.cgcg.redis.mybatis;
 
 import org.apache.ibatis.cache.Cache;
-import org.cgcg.redis.core.RedisManager;
-import org.cgcg.redis.core.entity.RedisHelper;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.util.Assert;
 
@@ -11,13 +9,12 @@ import java.util.concurrent.locks.ReadWriteLock;
 import java.util.concurrent.locks.ReentrantReadWriteLock;
 
 /**
- * .
+ * redis缓存管理工具.
  *
  * @author zhicong.lin
  * @date 2019/6/24
  */
 public class RedisCacheManager implements Cache {
-    private static final String PREFIX = "RedisCacheManager:";
     // 读写锁
     private final ReadWriteLock readWriteLock = new ReentrantReadWriteLock(true);
 
@@ -38,7 +35,7 @@ public class RedisCacheManager implements Cache {
     @Override
     public void putObject(Object cacheKey, Object cacheValue) {
         getRedisCacheTemplate().opsForHash().put(id, cacheKey.toString(), cacheValue);
-        getRedisCacheTemplate().expire(id, 1L, TimeUnit.MINUTES);
+        getRedisCacheTemplate().expire(id, 2L, TimeUnit.HOURS);
     }
 
     @Override

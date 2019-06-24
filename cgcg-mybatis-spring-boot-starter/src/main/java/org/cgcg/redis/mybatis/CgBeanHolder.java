@@ -1,4 +1,4 @@
-package org.cgcg.redis.core.mybatis;
+package org.cgcg.redis.mybatis;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.ApplicationContext;
